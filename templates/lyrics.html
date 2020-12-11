@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<p class="response"></p>
+    <script>
+console.log('hrll1')
+        fetch("https://rapidapi.p.rapidapi.com/?artist=Bon%20Jovi&song=Livin'%20on%20a%20prayer", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "mourits-lyrics.p.rapidapi.com",
+                    "x-rapidapi-key": "23a1830e2amshb300f3a2bac9a56p1793d1jsn2b8cb9b48d12"
+                }
+            })
+                .then(response => {
+                    console.log('help')
+                    console.log(response.json());
+
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+    </script>
+</body>
+</html>

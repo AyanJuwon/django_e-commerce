@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+
+
+<link rel="stylesheet" href="{% static 'css/global.css' %}" />
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="{% static 'js/client.js' %}" defer></script>
+<!-- <script src="{% static 'js/stripe-js.js' %}" ></script> -->
+
+{% block content %}
+
+<body class="grey lighten-3">
+
+
+    <!--Main layout-->
+    <main class=" pt-4">
+        <div class="container wow fadeIn">
+
+            <!-- Heading -->
+            <h2 class="my-5 h2 text-center">Payment</h2>
+
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-12 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+<section>
+<form action="." method="post" id="
+stripe-form">
+{% csrf_token %}
+    <div class="form-row">
+        <label for="card-element">
+            Credit or debit card
+        </label>
+        <div id="card-element" class="StripeElement StripeElement--empty">
+            <div class="__PrivateStripeElement"
+                style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                <iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeFrame0855"
+                    allowpaymentrequest="true"
+                    src="https://js.stripe.com/v3/elements-inner-card-2d3a53533e7070dff1d705192c29cb82.html#style[base][color]=%2332325d&amp;style[base][fontFamily]=%22Helvetica+Neue%22%2C+Helvetica%2C+sans-serif&amp;style[base][fontSmoothing]=antialiased&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23aab7c4&amp;style[invalid][color]=%23fa755a&amp;style[invalid][iconColor]=%23fa755a&amp;componentName=card&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;apiKey=pk_test_51Hegs1Gc4vjnaNkcpnNr4QkX3aUE2YF4W3MhhBzPA1gBjQgeeapr8SGFZsERutjYaZRsv1HzwW7YUYc4ue93zQDV00oBWjkfIT&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController0851"
+                    title="Secure card payment input frame"
+                    style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translateZ(0px) !important; height: 19.2px;"></iframe><input
+                    class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false"
+                    maxlength="1"
+                    style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;">
+            </div>
+        </div>
+
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
+    </div>
+
+    <button>Submit Payment</button>
+</form>
+</section>
+                    </div>
+<!-- Cart -->
+<ul class="list-group mt-1 mb-3 z-depth-1">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+            <h6 class="my-0">Product name</h6>
+            <small class="text-muted">Brief description</small>
+        </div>
+        <span class="text-muted">$12</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+            <h6 class="my-0">Second product</h6>
+            <small class="text-muted">Brief description</small>
+        </div>
+        <span class="text-muted">$8</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+            <h6 class="my-0">Third item</h6>
+            <small class="text-muted">Brief description</small>
+        </div>
+        <span class="text-muted">$5</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between bg-light">
+        <div class="text-success">
+            <h6 class="my-0">Promo code</h6>
+            <small>EXAMPLECODE</small>
+        </div>
+        <span class="text-success">-$5</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Total (USD)</span>
+        <strong>$20</strong>
+    </li>
+</ul>
+<!-- Cart -->
+<!-- 
+<script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe("pk_test_51Hegs1Gc4vjnaNkcpnNr4QkX3aUE2YF4W3MhhBzPA1gBjQgeeapr8SGFZsERutjYaZRsv1HzwW7YUYc4ue93zQDV00oBWjkfIT");
+    var checkoutButton = document.getElementById("checkout-button");
+
+    checkoutButton.addEventListener("click", function () {
+        fetch("/create-session", {
+            method: "POST",
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (session) {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function (result) {
+                // If redirectToCheckout fails due to a browser or network
+                // error, you should display the localized error message to your
+                // customer using error.message.
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function (error) {
+                console.error("Error:", error);
+            });
+    });
+</script>      -->
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+    {% endblock content %}
